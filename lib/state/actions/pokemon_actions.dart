@@ -1,3 +1,4 @@
+import 'package:dartx/dartx.dart';
 import 'package:pokedex_web/apis/api_service.dart';
 import 'package:pokedex_web/state/actions/actions.dart';
 import 'package:pokedex_web/state/app_state.dart';
@@ -17,7 +18,15 @@ class GetPokemonsAction extends LoadingAction<AppState> {
   @override
   Future<AppState> reduce() async {
     final pagination = await getIt<ApiService>().pokemonApi.getAll(offset: offset);
+    final pokemons = [
+      ...?state.pokemonState?.pokemons,
+      ...?pagination?.results,
+    ];
+    final pokemonState = state.pokemonState?.copyWith(pokemons: pokemons.toUnmodifiable());
 
-    return state.copyWith(pagination: pagination);
+    return state.copyWith(
+      pagination: pagination,
+      pokemonState: pokemonState,
+    );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:pokedex_web/features/pokemon_list/pokemon_list_connector.dart';
+import 'package:pokedex_web/features/home_page/home_page_connector.dart';
 import 'package:pokedex_web/state/app_state.dart';
 import 'package:pokedex_web/utilties/app_router.dart';
 import 'package:pokedex_web/utilties/theme.dart';
@@ -21,7 +21,7 @@ class PokedexApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Pokedex Web App',
         theme: pokedexTheme,
-        initialRoute: PokemonListConnector.route,
+        initialRoute: HomePageConnector.route,
         onGenerateRoute: router.generateRoute,
       ),
     );

@@ -16,17 +16,19 @@ class PokemonListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      tileColor: isSelected ? Colors.amber : Colors.white,
-      leading: CachedNetworkImage(
-        imageUrl: imageUrl ?? pokemonImageUrl.replaceAll('%s', '1'),
-        height: 50,
-        width: 50,
-        placeholder: (_, __) => Center(
-          child: CircularProgressIndicator(),
+    return SizedBox(
+      child: ListTile(
+        tileColor: isSelected ? Colors.amber : Colors.white,
+        leading: CachedNetworkImage(
+          imageUrl: imageUrl ?? pokemonImageUrl.replaceAll('%s', '1'),
+          height: 50,
+          width: 50,
+          placeholder: (_, __) => Center(
+            child: CircularProgressIndicator(),
+          ),
         ),
+        title: Text(name ?? ''),
       ),
-      title: Text(name ?? ''),
     );
   }
 }
