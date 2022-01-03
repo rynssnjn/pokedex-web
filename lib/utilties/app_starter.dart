@@ -6,7 +6,6 @@ import 'package:pokedex_web/apis/api_service.dart';
 import 'package:pokedex_web/persistor/state_persistor.dart';
 import 'package:pokedex_web/persistor/storage_engine_web.dart';
 import 'package:pokedex_web/pokdex_app.dart';
-import 'package:pokedex_web/state/actions/pokemon_actions.dart';
 import 'package:pokedex_web/state/app_state.dart';
 
 final getIt = GetIt.instance;
@@ -34,8 +33,5 @@ Future<void> startApp() async {
 
   getIt.registerLazySingleton<ApiService>(() => ApiService());
 
-
-  await store.dispatch(GetPokemonsAction());
-
-  runApp(PokedexApp());
+  runApp(PokedexApp(store: store));
 }
