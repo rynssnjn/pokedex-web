@@ -2,9 +2,11 @@ import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:get_it/get_it.dart';
+import 'package:pokedex_web/apis/api_service.dart';
 import 'package:pokedex_web/persistor/state_persistor.dart';
 import 'package:pokedex_web/persistor/storage_engine_web.dart';
 import 'package:pokedex_web/pokdex_app.dart';
+import 'package:pokedex_web/state/actions/pokemon_actions.dart';
 import 'package:pokedex_web/state/app_state.dart';
 
 final getIt = GetIt.instance;
@@ -24,13 +26,16 @@ Future<void> startApp() async {
     debugPrint(e.toString());
   }
 
-  final _ = Store<AppState>(
+  final store = Store<AppState>(
     initialState: state ?? AppState.init(),
     actionObservers: [Log.printer(formatter: Log.verySimpleFormatter)],
     persistor: persistor,
   );
 
-  // API SERVICE
+  getIt.registerLazySingleton<ApiService>(() => ApiService());
+
+
+  await store.dispatch(GetPokemonsAction());
 
   runApp(PokedexApp());
 }

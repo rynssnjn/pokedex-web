@@ -1,6 +1,6 @@
 import 'package:async_redux/async_redux.dart';
-// ignore: depend_on_referenced_packages
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pokedex_web/apis/pokeapi/models/pagination_pokemon.dart';
 import 'package:pokedex_web/persistor/state_persistor.dart';
 
 part 'app_state.freezed.dart';
@@ -10,11 +10,14 @@ part 'app_state.g.dart';
 class AppState with _$AppState {
   factory AppState({
     @JsonKey(name: 'wait', ignore: true) Wait? wait,
+    @JsonKey(name: 'pagination', ignore: true) PaginationPokemon? pagination,
   }) = _AppState;
 
   factory AppState.fromJson(Map<String, dynamic> json) => _$AppStateFromJson(json);
 
-  factory AppState.init() => AppState();
+  factory AppState.init() => AppState(
+        wait: Wait(),
+      );
 }
 
 class AppStateSerializer extends StateSerializer<AppState> {
