@@ -23,8 +23,10 @@ class _BottomBarIndicatorState extends State<BottomBarIndicator> {
       child: SmoothPageIndicator(
         controller: widget.controller!,
         count: 4,
-        effect: WormEffect(
-          type: WormType.thin,
+        effect: ScrollingDotsEffect(
+          dotHeight: 10,
+          dotWidth: 10,
+          activeDotScale: 2,
           activeDotColor: widget.pageIndicator!,
         ),
       ),
