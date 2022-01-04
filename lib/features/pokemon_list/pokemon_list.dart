@@ -7,12 +7,14 @@ import 'package:pokedex_web/utilties/constants.dart';
 
 class PokemonList extends StatelessWidget {
   const PokemonList({
+    required this.onSelectPokemon,
     required this.loadNextPage,
     required this.pokemons,
     this.isExpanded = false,
     Key? key,
   }) : super(key: key);
 
+  final Future<void> Function(int id) onSelectPokemon;
   final Future<void> Function() loadNextPage;
   final Async<List<PokemonPokemon>> pokemons;
   final bool isExpanded;
@@ -37,6 +39,7 @@ class PokemonList extends StatelessWidget {
               children: p
                       ?.mapIndexed(
                         (index, pokemon) => PokemonListItem(
+                          onTap: () => onSelectPokemon(index + 1),
                           imageUrl: pokemonImageUrl.replaceAll('%s', '${index + 1}'),
                           name: pokemon.name,
                           isSelected: index == 3,
