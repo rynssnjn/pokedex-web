@@ -1,0 +1,9 @@
+const about = 'About';
+const height = 'Height';
+const weight = 'Weight';
+const baseExperience = 'Base Experience';
+const abilities = 'Abilities';
+const stats = 'Stats';
+const evolution = 'Evolution';
+const moves = 'Moves';
+const name = 'Name';

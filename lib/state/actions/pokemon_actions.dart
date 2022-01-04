@@ -49,6 +49,12 @@ class GetPokemonDataAction extends LoadingAction<AppState> {
 
     return state.copyWith.pokemonState!(selectedPokemon: pokemon);
   }
+
+  @override
+  void after() {
+    dispatch(GetEvolutionChain(id));
+    super.after();
+  }
 }
 
 /// Gets evolution chain of the selected pokemon

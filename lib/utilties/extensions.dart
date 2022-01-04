@@ -45,10 +45,6 @@ extension IntExt on int {
 }
 
 extension StringExt on String {
-  String capitalize() {
-    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
-  }
-
   Color get colorValue {
     switch (this) {
       case 'grass':

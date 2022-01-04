@@ -13,6 +13,7 @@ class PokemonDetailsConnector extends StatelessWidget {
       vm: () => PokemonDetailsFactory(),
       builder: (context, vm) => PokemonDetails(
         pokemon: vm.pokemon,
+        evolution: vm.evolution,
       ),
     );
   }

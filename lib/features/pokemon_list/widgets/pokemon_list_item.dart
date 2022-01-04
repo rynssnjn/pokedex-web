@@ -21,25 +21,23 @@ class PokemonListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return LoadingWidget(
       futureCallback: () async => onSelectPokemon(),
-      renderChild: (isLoading, onTap) => SizedBox(
-        child: ListTile(
-          onTap: onTap,
-          tileColor: isSelected ? Colors.amber : Colors.white,
-          leading: CachedNetworkImage(
-            imageUrl: imageUrl ?? pokemonImageUrl.replaceAll('%s', '1'),
-            height: 50,
-            width: 50,
-            placeholder: (_, __) => Center(child: CircularProgressIndicator()),
-          ),
-          title: Text(name ?? ''),
-          trailing: isLoading
-              ? SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: Center(child: CircularProgressIndicator()),
-                )
-              : null,
+      renderChild: (isLoading, onTap) => ListTile(
+        onTap: onTap,
+        tileColor: isSelected ? Colors.amber : Colors.white,
+        leading: CachedNetworkImage(
+          imageUrl: imageUrl ?? pokemonImageUrl.replaceAll('%s', '1'),
+          height: 50,
+          width: 50,
+          placeholder: (_, __) => Center(child: CircularProgressIndicator()),
         ),
+        title: Text(name ?? ''),
+        trailing: isLoading
+            ? SizedBox(
+                height: 20,
+                width: 20,
+                child: Center(child: CircularProgressIndicator()),
+              )
+            : null,
       ),
     );
   }
