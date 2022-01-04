@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_web/apis/pokeapi/models/pokemon_pokemon.dart';
+import 'package:pokedex_web/features/pokemon_details/pokemon_details_connector.dart';
 import 'package:pokedex_web/features/pokemon_list/pokemon_list_connector.dart';
 import 'package:pokedex_web/models/async.dart';
 import 'package:pokedex_web/utilties/constants.dart';
@@ -37,9 +38,10 @@ class HomePage extends StatelessWidget {
                   pokemons: pokemons,
                   isExpanded: isExpanded,
                 ),
+                Expanded(child: PokemonDetailsConnector()),
               ],
             )
-          : Container(),
+          : PokemonDetailsConnector(),
     );
   }
 }

@@ -10,6 +10,7 @@ class PokemonList extends StatelessWidget {
     required this.onSelectPokemon,
     required this.loadNextPage,
     required this.pokemons,
+    this.selectedPokemonId,
     this.isExpanded = false,
     Key? key,
   }) : super(key: key);
@@ -17,6 +18,7 @@ class PokemonList extends StatelessWidget {
   final Future<void> Function(int id) onSelectPokemon;
   final Future<void> Function() loadNextPage;
   final Async<List<PokemonPokemon>> pokemons;
+  final int? selectedPokemonId;
   final bool isExpanded;
 
   @override
@@ -39,10 +41,10 @@ class PokemonList extends StatelessWidget {
               children: p
                       ?.mapIndexed(
                         (index, pokemon) => PokemonListItem(
-                          onTap: () => onSelectPokemon(index + 1),
+                          onSelectPokemon: () => onSelectPokemon(index + 1),
                           imageUrl: pokemonImageUrl.replaceAll('%s', '${index + 1}'),
                           name: pokemon.name,
-                          isSelected: index == 3,
+                          isSelected: selectedPokemonId == index + 1,
                         ),
                       )
                       .toList() ??
