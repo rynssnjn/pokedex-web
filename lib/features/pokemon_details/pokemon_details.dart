@@ -1,5 +1,8 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_web/apis/pokeapi/models/pokemon_data.dart';
+import 'package:pokedex_web/features/pokemon_details/widgets/data_header.dart';
+import 'package:pokedex_web/utilties/extensions.dart';
 
 class PokemonDetails extends StatelessWidget {
   const PokemonDetails({
@@ -11,6 +14,16 @@ class PokemonDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('name: ${pokemon?.name}');
+    return Column(
+      children: [
+        DataHeader(
+          backgroundColor: pokemon?.typeColor,
+          name: pokemon?.name?.toUpperCase(),
+          id: pokemon?.idValue,
+          imageURL: pokemon?.sprites?.frontDefault,
+          types: pokemon?.types?.map((e) => e.type!).toUnmodifiable(),
+        )
+      ],
+    );
   }
 }
