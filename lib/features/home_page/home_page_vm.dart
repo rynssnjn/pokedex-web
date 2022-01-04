@@ -1,5 +1,6 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:dartx/dartx.dart';
+import 'package:pokedex_web/apis/pokeapi/models/pokemon_data.dart';
 import 'package:pokedex_web/apis/pokeapi/models/pokemon_pokemon.dart';
 import 'package:pokedex_web/features/home_page/home_page_connector.dart';
 import 'package:pokedex_web/models/async.dart';
@@ -11,6 +12,7 @@ class HomePageFactory extends VmFactory<AppState, HomePageConnector> {
   Vm? fromStore() => HomePageVM(
         loadNextPage: _loadNextPage,
         pokemons: _getPokemons(),
+        selectedPokemon: state.pokemonState?.selectedPokemon,
       );
 
   Async<List<PokemonPokemon>> _getPokemons() {
@@ -35,8 +37,10 @@ class HomePageVM extends Vm {
   HomePageVM({
     required this.loadNextPage,
     required this.pokemons,
-  }) : super(equals: [pokemons]);
+    this.selectedPokemon,
+  }) : super(equals: [pokemons, selectedPokemon]);
 
   final Future<void> Function() loadNextPage;
   final Async<List<PokemonPokemon>> pokemons;
+  final PokemonData? selectedPokemon;
 }

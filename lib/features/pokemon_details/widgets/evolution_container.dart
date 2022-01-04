@@ -39,20 +39,25 @@ class EvolutionContainer extends StatelessWidget {
             name: evolution?.base?.name?.capitalize(),
             imageUrl: evolution?.base?.url,
             id: _getPokemonId(evolution?.base?.url),
+            decorationColor: titleColor,
           ),
         if (evolution?.middle != null)
           EvolutionCardItem(
             name: evolution?.middle?.name?.capitalize(),
             imageUrl: evolution?.middle?.url,
             id: _getPokemonId(evolution?.middle?.url),
+            decorationColor: titleColor,
+            isEven: true,
           ),
         if (evolution?.last?.isNotEmpty == true)
           ...evolution?.last
-                  ?.map(
-                    (p) => EvolutionCardItem(
+                  ?.mapIndexed(
+                    (index, p) => EvolutionCardItem(
                       name: p.name?.capitalize(),
                       imageUrl: p.url,
                       id: _getPokemonId(p.url),
+                      decorationColor: titleColor,
+                      isEven: index % 2 == 0 && index != 0,
                     ),
                   )
                   .toUnmodifiable() ??

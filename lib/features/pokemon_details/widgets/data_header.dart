@@ -1,8 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_web/apis/pokeapi/models/pokemon_type.dart';
 import 'package:pokedex_web/features/pokemon_details/widgets/type_card.dart';
+import 'package:pokedex_web/widgets/circular_cached_image.dart';
 
 class DataHeader extends StatelessWidget {
   const DataHeader({
@@ -34,20 +35,7 @@ class DataHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.blueGrey, width: 3.0),
-                ),
-                width: 120,
-                height: 120,
-                child: CachedNetworkImage(
-                  imageUrl: imageURL ?? '',
-                  fit: BoxFit.fill,
-                  placeholder: (_, __) => Center(child: CircularProgressIndicator()),
-                ),
-              ),
+              CircularCachedImage(imageURL: imageURL),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end,

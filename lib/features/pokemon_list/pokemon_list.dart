@@ -5,13 +5,14 @@ import 'package:pokedex_web/features/pokemon_list/widgets/pokemon_list_item.dart
 import 'package:pokedex_web/models/async.dart';
 import 'package:pokedex_web/utilties/constants.dart';
 
-class PokemonList extends StatelessWidget {
+class PokemonList extends StatefulWidget {
   const PokemonList({
     required this.onSelectPokemon,
     required this.loadNextPage,
     required this.pokemons,
     this.selectedPokemonId,
     this.isExpanded = false,
+    this.appBarColor,
     Key? key,
   }) : super(key: key);
 
@@ -20,31 +21,58 @@ class PokemonList extends StatelessWidget {
   final Async<List<PokemonPokemon>> pokemons;
   final int? selectedPokemonId;
   final bool isExpanded;
+  final Color? appBarColor;
+
+  @override
+  State<PokemonList> createState() => _PokemonListState();
+}
+
+class _PokemonListState extends State<PokemonList> {
+  late ScrollController controller;
+
+  @override
+  void initState() {
+    controller = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 240,
       child: Scaffold(
-        appBar: isExpanded ? null : AppBar(title: Text('Pokedex')),
+        appBar: widget.isExpanded
+            ? null
+            : AppBar(
+                title: Text('Pokedex'),
+                backgroundColor: widget.appBarColor,
+              ),
         body: NotificationListener<ScrollNotification>(
           onNotification: (scrollInfo) {
             final currentScroll = scrollInfo.metrics.pixels;
             final maxScroll = scrollInfo.metrics.maxScrollExtent;
             if (currentScroll >= maxScroll) {
-              loadNextPage();
+              widget.loadNextPage();
             }
             return false;
           },
-          child: pokemons.when(
+          child: widget.pokemons.when(
             (p) => ListView(
+              controller: controller,
               children: p
                       ?.mapIndexed(
                         (index, pokemon) => PokemonListItem(
-                          onSelectPokemon: () => onSelectPokemon(index + 1),
+                          onSelectPokemon: () => widget.onSelectPokemon(index + 1),
                           imageUrl: pokemonImageUrl.replaceAll('%s', '${index + 1}'),
                           name: pokemon.name,
-                          isSelected: selectedPokemonId == index + 1,
+                          tileColor: widget.selectedPokemonId == index + 1 ? widget.appBarColor : null,
+                          indicatorColor: widget.appBarColor,
                         ),
                       )
                       .toList() ??

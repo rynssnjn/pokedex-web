@@ -11,6 +11,7 @@ import 'package:pokedex_web/features/pokemon_details/widgets/moves_container.dar
 import 'package:pokedex_web/features/pokemon_details/widgets/stats_container.dart';
 import 'package:pokedex_web/models/async.dart';
 import 'package:pokedex_web/utilties/extensions.dart';
+import 'package:pokedex_web/widgets/custom_circular_indicator.dart';
 
 class PokemonDetails extends StatefulWidget {
   const PokemonDetails({
@@ -83,7 +84,12 @@ class _PokemonDetailsState extends State<PokemonDetails> {
                           evolution: e,
                           titleColor: widget.pokemon?.typeColor,
                         ),
-                        loading: () => Center(child: CircularProgressIndicator()),
+                        loading: () => Center(
+                          child: CustomCircularIndicator(
+                            valueColor: widget.pokemon?.typeColor ?? Colors.blueAccent,
+                            strokeWidth: 5,
+                          ),
+                        ),
                         error: (key) => Text(key!),
                       ) ??
                       Container(),

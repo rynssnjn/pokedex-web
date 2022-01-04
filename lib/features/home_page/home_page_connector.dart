@@ -4,6 +4,7 @@ import 'package:pokedex_web/features/home_page/home_page.dart';
 import 'package:pokedex_web/features/home_page/home_page_vm.dart';
 import 'package:pokedex_web/state/actions/pokemon_actions.dart';
 import 'package:pokedex_web/state/app_state.dart';
+import 'package:pokedex_web/utilties/extensions.dart';
 
 class HomePageConnector extends StatelessWidget {
   static const route = 'home-page';
@@ -20,6 +21,7 @@ class HomePageConnector extends StatelessWidget {
       builder: (context, vm) => HomePage(
         loadNextPage: vm.loadNextPage,
         pokemons: vm.pokemons,
+        appBarColor: vm.selectedPokemon?.typeColor,
       ),
     );
   }

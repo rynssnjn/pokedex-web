@@ -5,6 +5,7 @@ import 'package:pokedex_web/features/pokemon_list/pokemon_list.dart';
 import 'package:pokedex_web/features/pokemon_list/pokemon_list_vm.dart';
 import 'package:pokedex_web/models/async.dart';
 import 'package:pokedex_web/state/app_state.dart';
+import 'package:pokedex_web/utilties/extensions.dart';
 
 class PokemonListConnector extends StatelessWidget {
   const PokemonListConnector({
@@ -26,8 +27,9 @@ class PokemonListConnector extends StatelessWidget {
         onSelectPokemon: vm.onSelectPokemon,
         loadNextPage: loadNextPage,
         pokemons: pokemons,
-        selectedPokemonId: vm.selectedPokemonId,
+        selectedPokemonId: vm.selectedPokemon?.id,
         isExpanded: isExpanded,
+        appBarColor: vm.selectedPokemon?.typeColor,
       ),
     );
   }

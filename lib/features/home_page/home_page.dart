@@ -9,18 +9,23 @@ class HomePage extends StatelessWidget {
   const HomePage({
     required this.loadNextPage,
     required this.pokemons,
+    this.appBarColor,
     Key? key,
   }) : super(key: key);
 
   final Future<void> Function() loadNextPage;
   final Async<List<PokemonPokemon>> pokemons;
+  final Color? appBarColor;
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final bool isExpanded = screenWidth >= breakpoint;
     return Scaffold(
-      appBar: AppBar(title: Text('Pokedex')),
+      appBar: AppBar(
+        title: Text('Pokedex'),
+        backgroundColor: appBarColor,
+      ),
       drawer: isExpanded
           ? null
           : Drawer(

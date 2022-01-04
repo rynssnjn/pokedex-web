@@ -11,10 +11,12 @@ class PokemonDetailsConnector extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, PokemonDetailsVM>(
       vm: () => PokemonDetailsFactory(),
-      builder: (context, vm) => PokemonDetails(
-        pokemon: vm.pokemon,
-        evolution: vm.evolution,
-      ),
+      builder: (context, vm) => vm.pokemon != null
+          ? PokemonDetails(
+              pokemon: vm.pokemon,
+              evolution: vm.evolution,
+            )
+          : Container(),
     );
   }
 }
