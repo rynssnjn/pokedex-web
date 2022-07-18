@@ -8,7 +8,7 @@ import 'package:pokedex_web/utilties/extensions.dart';
 
 class HomePageConnector extends StatelessWidget {
   static const route = 'home-page';
-
+  // asdfsdfasd
   const HomePageConnector({Key? key}) : super(key: key);
 
   @override
